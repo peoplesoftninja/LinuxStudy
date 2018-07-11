@@ -112,3 +112,9 @@ history | tail -20 | mailx -s "log `hostname` pada `date`" asyed@nshe.nevada.edu
 
 https://www.rexegg.com/regex-quickstart.html
 
+# TODO
+
+# Quoting
+# FormattingCommands
+# Locate, Find and Whereis
+
