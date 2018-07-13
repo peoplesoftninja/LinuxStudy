@@ -187,6 +187,87 @@ in man to search, use `/` for forward search and `?` for backward search and `n`
 
 # THE LINUX FILE SYSTEM
 
-# ABSOLUTE AND RELATIVE PATH
+![](LinuxFileHeirarchy.png)
+
 
 # FILES AND DIRECTORIES
+
+```shell
+[user@ museum]$ mkdir documents maps art
+[user@ museum]$ ls
+art  documents  maps
+[user@ museum]$ mkdir -p art/paintings/modern # To create recursive directory at the same time
+[user@ museum]$ ls -R art # Recursive ls
+art:
+paintings
+art/paintings:
+modern
+art/paintings/modern:
+[user@ museum]$ rmdir statues # to remove empty directory, else use rm -r
+[user@ museum]$ ls
+art  documents  maps
+[user@ museum]$ cd documents
+[user@ documents]$ touch ancient.txt # to create a file
+[user@ documents]$ ls
+ancient.txt
+[user@ museum]$ cp documents/ancient.txt maps # to copy, to copy recursive use -R
+[user@ museum]$ ls maps
+ancient.txt
+[user@ museum]$ mv maps documents # move command, also used for rename
+[user@ museum]$ ls
+art  documents
+```
+
+# Archiving Files on the Command Line
+
+![](archiving.png)
+
+```bash
+[user@ museum]$ tar -cf documents.tar documents
+[user@ museum]$ ls
+art.bak  documents  documents.tar
+[user@ museum]$ tar -czf documents.gz documents
+[user@ museum]$ ls
+art.bak  documents  documents.gz  documents.tar
+[user@ museum]$ tar -cjf documents.bz2 documents
+[user@ museum]$ ls
+art.bak  documents  documents.bz2  documents.gz  documents.tar
+[user@ museum]$ rm -r documents
+[user@ museum]$ ls
+art.bak  documents.bz2  documents.gz  documents.tar
+[user@ museum]$ tar -xzf documents.gz
+[user@ museum]$ ls
+art.bak  documents  documents.bz2  documents.gz  documents.tar
+[user@ museum]$ ls -R documents
+documents:
+ancient.txt  maps
+documents/maps:
+ancient.txt
+[user@ museum]$ rm -rf documents
+[user@ museum]$ tar -xvjf documents.bz2
+documents/
+documents/ancient.txt
+documents/maps/
+documents/maps/ancient.txt
+```
+
+# Vieweing Text
+
+![](textViewing.png)
+
+`tail -fn0 logfile`   for single line
+
+# Analyzing Text
+
+
+![](analyzingText.png)
+
+`>` to send output to destination and `>>` to append ouput to the destination instead of replacing old data
+
+![](cutcommand.png)
+
+# TODO
+
+## Pipes and Regular Expressions
+
+## Turning Commands into a Script
