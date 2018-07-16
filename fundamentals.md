@@ -43,6 +43,18 @@ https://linuxacademy.com/cp/modules/view/id/72
 Linux Red hat System Admin
 https://linuxacademy.com/cp/modules/view/id/39
 
+Linux Full CI/CD Pipeline
+https://linuxacademy.com/cp/courses/lesson/course/2196/lesson/2/module/218
+
+Virtualization Course
+https://linuxacademy.com/cp/modules/view/id/211
+
+OpenSource Admin
+https://linuxacademy.com/cp/modules/view/id/194
+
+
+
+
 
 # Commands
 
@@ -183,7 +195,6 @@ socks5tcp_bind(3)       - Connect to a SOCKSv5 server and request a listening so
 
 in man to search, use `/` for forward search and `?` for backward search and `n` to go to next search
 
-# TODO
 
 # THE LINUX FILE SYSTEM
 
@@ -266,8 +277,53 @@ documents/maps/ancient.txt
 
 ![](cutcommand.png)
 
-# TODO
 
 ## Pipes and Regular Expressions
 
-## Turning Commands into a Script
+grep
+
+![](grepCommand.png)
+
+`grep -i 'error' xyz.log | wc -w`
+
+To start with a string x
+
+`grep -i '^error' xyz.log`
+
+print lines that end with string
+
+`grep -i 'error$' xyz.log`
+
+# Turning Commands into a Script
+
+## nano
+
+Command line text editor
+
+not in AIX
+
+## vi/vim
+
+![](vicheatsheet.png)
+
+* h = cursor left
+* j = cursor down
+* k = curson up
+* l = cursor right
+* to move to top of editor `gg`
+* to append text at end of line `shift+a`
+
+![](movingCursor.png)
+
+To copy
+* go to text press `v`
+* using arrow keys select till where you want to copy then press `y`
+* To paste press `p`
+* to undo press `u`. Only one undo can be performed
+
+`vimtutor` to learn more
+
+## Shell Scripting Part 1
+
+## Shell Scripting Part 2
+
