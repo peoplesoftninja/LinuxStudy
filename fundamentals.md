@@ -325,5 +325,42 @@ To copy
 
 ## Shell Scripting Part 1
 
+a shell script need not end with `.sh` This is just for us to understand.
+
+The shebang is used to tell bash what scripting language is being used `#!/bin/bash` For better portability use `#!/usr/bin/env bash`
+
+A comment line begins with `# comment`
+
+### Permissions
+
+![](filePermissions.png)
+
+[user][group][other]
+
+to simply add executive permissions to the user do `chmod +x file` and to remove `chmod -x file`
+
+### if-else-fi
+
+```shell
+
+#!/bin/bash
+
+# My daily routine script
+
+# Display the date and time in UTC format
+date -u
+
+# Daily greeting
+echo "Hello user $LOGNAME"
+
+if [ "$PWD" == "$HOME" ]
+then
+   echo "You are home"
+else
+   echo "You are in $PWD"
+fi
+
+```
 ## Shell Scripting Part 2
 
+TODO
