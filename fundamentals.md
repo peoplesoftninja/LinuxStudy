@@ -294,6 +294,10 @@ print lines that end with string
 
 `grep -i 'error$' xyz.log`
 
+cut a command and get a section out
+
+`grep 'error' xyz.log | cut -d" " -f2` This command will print the error line and cut it into section based on space and then print the section section. So if the line was `error logfile23` it will print `logfile23` and if instead of `-f2` it was `-f1` it would print `error`
+
 # Turning Commands into a Script
 
 ## nano
@@ -322,6 +326,10 @@ To copy
 * to undo press `u`. Only one undo can be performed
 
 `vimtutor` to learn more
+
+![](vimCheatSheet.png)
+
+Go to [Link](http://www.worldtimzone.com/res/vi.html) for more details about any key
 
 ## Shell Scripting Part 1
 
@@ -363,4 +371,43 @@ fi
 ```
 ## Shell Scripting Part 2
 
-TODO
+For Loop
+
+```shell
+for i in john mary jak pedro
+> do
+> echo "$i"
+> done
+john
+mary
+jak
+pedro
+```
+
+For Loop -- Range
+
+```shell
+for i in {1..10}
+> do
+> echo "$i"
+> done
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+```
+The `$1` is positional argument 1 in shell and `$2` is second argument and so on
+
+When storing a command result in a variable use back quote {`}
+
+```shell
+USERNAME=`who -m | cut -d" " -f1`
+```
+The above will store the user name in the variable `USERNAME`
+
