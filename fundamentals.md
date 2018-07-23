@@ -1,5 +1,39 @@
+- [Linux Administration](#linux-administration)
+	- [Distribution](#distribution)
+	- [Linux File System](#linux-file-system)
+	- [Login Scripts Execution order](#login-scripts-execution-order)
+- [Commands](#commands)
+	- [General Commands](#general-commands)
+	- [uname command](#uname-command)
+	- [Bash Regular Expression](#bash-regular-expression)
+	- [Quoting](#quoting)
+	- [Locate, Find and Whereis](#locate-find-and-whereis)
+	- [help comman - man](#help-comman---man)
+	- [FILES AND DIRECTORIES](#files-and-directories)
+	- [Archiving Files on the Command Line](#archiving-files-on-the-command-line)
+	- [Vieweing Text](#vieweing-text)
+	- [Analyzing Text](#analyzing-text)
+	- [Pipes and Regular Expressions](#pipes-and-regular-expressions)
+	- [Hardware](#hardware)
+	- [Process](#process)
+	- [System Logging](#system-logging)
+- [Turning Commands into a Script](#turning-commands-into-a-script)
+	- [vi/vim](#vivim)
+	- [Shell Scripting](#shell-scripting)
+	- [if-else-fi](#if-else-fi)
+	- [For Loop](#for-loop)
+- [Networking](#networking)
+- [Identity Management](#identity-management)
+	- [Basic Identity](#basic-identity)
+	- [Permissions](#permissions)
+	- [Adding Users](#adding-users)
+	- [Symbolic Link](#symbolic-link)
+	- [tmp file and Sticky bits](#tmp-file-and-sticky-bits)
+- [Sources](#sources)
 
 # Linux Administration
+
+## Distribution
 
 A Linux Distribution is comprised of
 
@@ -31,35 +65,47 @@ Most Common Distributions
 
 8. CentOS: Rebuilt of Redhat for Data Server. No Support of Red Hat. But large open community
 
-# Sources
 
-Linux Essentials
-https://linuxacademy.com/cp/modules/view/id/161
+## Linux File System
 
+![](./img/LinuxFileHeirarchy.png)
 
-Bash Scripting
-https://linuxacademy.com/cp/modules/view/id/72
+The hardrives are located in `/dev` For the first directory it will be `/dev/sda` and second will be `/dev/sdb` and so no. The first partition in the first drive will be `/dev/sda1` and so on
 
-Linux Red hat System Admin
-https://linuxacademy.com/cp/modules/view/id/39
+result for `df -g`
 
-Linux Full CI/CD Pipeline
-https://linuxacademy.com/cp/courses/lesson/course/2196/lesson/2/module/218
-
-Virtualization Course
-https://linuxacademy.com/cp/modules/view/id/211
-
-OpenSource Admin
-https://linuxacademy.com/cp/modules/view/id/194
+![](./img/personalDirectoryStructure.png)
 
 
+## Login Scripts Execution order
+
+When we log in shell following occurs
+1. first /etc/profile gets executed
+2. files are searched in following order
+	1. ~/bash_pofile
+	2. ~/bash_login
+	3. ~/.profile
+3. Next, ~/.basrc
+4. Usually bashrc calls /etc/bashrc
+5. ~/bash_logout gets executed when the user logs out
+
+![](./img/LoginExecution.png)
 
 
+To send an email of all the commands used when we log out
+
+* create a file ~./bash_logout in that put this command
+* 
+```shell
+history | tail -20 | mailx -s "log `hostname` pada `date`" asyed@nshe.nevada.edu
+```
 
 # Commands
 
+## General Commands
 
-* `la -a` (to show all files/directories) . is hidden
+
+* `la -a` (to show all files/directories) . is for hidden files
 
 * `ls -l` (all details)d = directory - = file
 
@@ -95,37 +141,14 @@ https://linuxacademy.com/cp/modules/view/id/194
 
 * to execute history command with all the numbers `history` then just enter the `!num` to get the command
 
-## Login Scripts Execution
-
-When we log in shell following occurs
-1. first /etc/profile gets executed
-2. files are searched in following order
-	1. ~/bash_pofile
-	2. ~/bash_login
-	3. ~/.profile
-3. Next, ~/.basrc
-4. Usually bashrc calls /etc/bashrc
-5. ~/bash_logout gets executed when the user logs out
-
-![](LoginExecution.png)
-
-
-To send an email of all the commands used when we log out
-
-* create a file ~./bash_logout in that put this command
-* 
-```shell
-history | tail -20 | mailx -s "log `hostname` pada `date`" asyed@nshe.nevada.edu
-```
-
 ## Bash Regular Expression
 
-![](bashrecheatsheet.png)
+![](./img/bashrecheatsheet.png)
 
 https://www.rexegg.com/regex-quickstart.html
 
 
-# Quoting
+## Quoting
 
 The double quotes will give the value where as single quotes will retain the string
 
@@ -142,7 +165,7 @@ If we want to access a folder which has space then we can use both single or dou
 to enter single command in multiple lines use backslash `\` and press enter to start a new line
 
 
-# Locate, Find and Whereis
+## Locate, Find and Whereis
 
 locate xyz searches for xyz in all directories and sub directories. This is not in AIX
 
@@ -150,9 +173,9 @@ find does recursive search
 
 `find <full path mandatory> -name '*.xyz'`
 
-# man
+## help comman - man
 
-![](mansection.png)
+![](./img/mansection.png)
 
 how to use: `man ls`
 
@@ -196,18 +219,8 @@ socks5tcp_bind(3)       - Connect to a SOCKSv5 server and request a listening so
 in man to search, use `/` for forward search and `?` for backward search and `n` to go to next search
 
 
-# THE LINUX FILE SYSTEM
 
-![](LinuxFileHeirarchy.png)
-
-The hardrives are located in `/dev` For the first directory it will be `/dev/sda` and second will be `/dev/sdb` and so no. The first partition in the first drive will be `/dev/sda1` and so on
-
-result for `df -g`
-
-![](personalDirectoryStructure.png)
-
-
-# FILES AND DIRECTORIES
+## FILES AND DIRECTORIES
 
 ```shell
 [user@ museum]$ mkdir documents maps art
@@ -235,9 +248,9 @@ ancient.txt
 art  documents
 ```
 
-# Archiving Files on the Command Line
+## Archiving Files on the Command Line
 
-![](archiving.png)
+![](./img/archiving.png)
 
 ```bash
 [user@ museum]$ tar -cf documents.tar documents
@@ -268,27 +281,27 @@ documents/maps/
 documents/maps/ancient.txt
 ```
 
-# Vieweing Text
+## Vieweing Text
 
-![](textViewing.png)
+![](./img/textViewing.png)
 
 `tail -fn0 logfile`   for single line
 
-# Analyzing Text
+## Analyzing Text
 
 
-![](analyzingText.png)
+![](./img/analyzingText.png)
 
 `>` to send output to destination and `>>` to append ouput to the destination instead of replacing old data
 
-![](cutcommand.png)
+![](./img/cutcommand.png)
 
 
 ## Pipes and Regular Expressions
 
 grep
 
-![](grepCommand.png)
+![](./img/grepCommand.png)
 
 `grep -i 'error' xyz.log | wc -w`
 
@@ -304,17 +317,37 @@ cut a command and get a section out
 
 `grep 'error' xyz.log | cut -d" " -f2` This command will print the error line and cut it into section based on space and then print the section section. So if the line was `error logfile23` it will print `logfile23` and if instead of `-f2` it was `-f1` it would print `error`
 
+## Hardware
+
+To get processor information `prtconf`
+
+Memory Usage
+
+`nmon` followed by `m` for total memory
+
+`nmon` followed by `t` followed by `4` for memory per process
+
+## Process
+
+A set of instructions loaded in the memory
+
+`ps` ran by itself will show processes in the current shell
+
+`ps -u user` will show the processes under that user
+
+`ps -e` shows all processes by all users
+
+`ps -ef` will show the above but also the path from where the command is running. This is taken from `/proc` directory
+
+## System Logging
+
+`/var/log` is where all major logs are. You need root access for this. `boot.log` has information when the user logs in. `messages.log` will have information about what is happening. `secure.log` has any IDM change
+
 # Turning Commands into a Script
-
-## nano
-
-Command line text editor
-
-not in AIX
 
 ## vi/vim
 
-![](vicheatsheet.png)
+![](./img/vicheatsheet.png)
 
 * h = cursor left
 * j = cursor down
@@ -323,7 +356,7 @@ not in AIX
 * to move to top of editor `gg`
 * to append text at end of line `shift+a`
 
-![](movingCursor.png)
+![](./img/movingCursor.png)
 
 To copy
 * go to text press `v`
@@ -333,11 +366,11 @@ To copy
 
 `vimtutor` to learn more
 
-![](vimCheatSheet.png)
+![](./img/vimCheatSheet.png)
 
 Go to [Link](http://www.worldtimzone.com/res/vi.html) for more details about any key
 
-## Shell Scripting Part 1
+## Shell Scripting
 
 a shell script need not end with `.sh` This is just for us to understand.
 
@@ -345,15 +378,7 @@ The shebang is used to tell bash what scripting language is being used `#!/bin/b
 
 A comment line begins with `# comment`
 
-### Permissions
-
-![](filePermissions.png)
-
-[user][group][other]
-
-to simply add executive permissions to the user do `chmod +x file` and to remove `chmod -x file`
-
-### if-else-fi
+## if-else-fi
 
 ```shell
 
@@ -375,9 +400,8 @@ else
 fi
 
 ```
-## Shell Scripting Part 2
 
-For Loop
+## For Loop
 
 ```shell
 for i in john mary jak pedro
@@ -417,32 +441,6 @@ USERNAME=`who -m | cut -d" " -f1`
 ```
 The above will store the user name in the variable `USERNAME`
 
-## Hardware
-
-To get processor information `prtconf`
-
-Memory Usage
-
-`nmon` followed by `m` for total memory
-
-`nmon` followed by `t` followed by `4` for memory per process
-
-## Process
-
-A set of instructions loaded in the memory
-
-`ps` ran by itself will show processes in the current shell
-
-`ps -u user` will show the processes under that user
-
-`ps -e` shows all processes by all users
-
-`ps -ef` will show the above but also the path from where the command is running. This is taken from `/proc` directory
-
-# System Logging
-
-`/var/log` is where all major logs are. You need root access for this. `boot.log` has information when the user logs in. `messages.log` will have information about what is happening. `secure.log` has any IDM change
-
 # Networking
 
 Each computer, Ipad, Phone have a unique number called macnumber/physical address. In Windows you can get this by typing `getmac` in cmd. For linux it is `ifconfig -a` . For AIX it is `netstat -ia`
@@ -473,16 +471,17 @@ Approximate round trip times in milli-seconds:
 
 Above google is domai name and 172.217.11.78 is an IP address. There is a Name Server which will do this translation. 
 
-![](simplifiedNetwork.png)
+![](./img/simplifiedNetwork.png)
 
 Also note, every system has a local address which can be used by itself only. This is important when we do some testings, like creating a server and using our local system as a server to perform tasks. The local(loopback) IP address always is `127.0.0.1`
 
 
-![](networkCommands.png)
+![](./img/networkCommands.png)
 
-# TODO
 
-# Basic Identity
+# Identity Management
+
+## Basic Identity
 
 To see the users logged in `who` and `w` for more details. This will show current users only.
 
@@ -490,19 +489,16 @@ To see the details of the user do `id <usr>`
 
 Three main files that store user information `/etc/passwd` which is primary config file for all users on a system. The `/etc/group` which is primary config file for all groups on system
 
-# Adding Users
+## Permissions
 
-![](addingUsers.png)
+![](./img/filePermissions.png)
 
-`sudo groupadd <groupName>` then go to `/etc/group` and get the groupID. 
+[user][group][other]
 
-`sudo useradd -G <groupID> -m -c "User Name" <userID>` The -m is for the default home. It is better to use this because all other settings are taken by default. To see what settings are taken do `cat /etc/default/useradd`. In this there will be a `SKEL` command which if we `ls -a /etc/skel` we will see it has all the `.bash_profile` etc. 
+to simply add executive permissions to the user do `chmod +x file` and to remove `chmod -x file`
 
-To change password `sudo passwd <userID>`
 
-# File and Directory Permission
-
-![](permissionCheatSheet.png)
+![](./img/permissionCheatSheet.png)
 
 |Symbolic|Octal|
 |---|---|
@@ -514,15 +510,66 @@ To change password `sudo passwd <userID>`
 |6|r;w|
 |7|r;w;x|
 
-`chmod -R 775 file.log` = rwxrwxr-x
+`chmod 775 file.log` = rwxrwxr-x
 
-The key values to remember are
+In the above file we can remove the read permissions from the Other group by `chmod o-r file.log`
+
+To add the read permissions we give `chmod o+r file.log`
+
 
 r|w|x
 ---|---|---|
 4|2|1
 
+to change ownership we use `chown` eg `chown <userName>:<groupName> file.log` if user is same then leave it empty. To just change group use `chgrp <groupName> file.log`.
 
-# Revise above 
-# Review AWS Route53
-# Security and File Permission
+Only root user can change the ownership. This is for security purpose so that a malicious file is not created and transferred to a malicious user. 
+
+## Adding Users
+
+![](./img/addingUsers.png)
+
+`sudo groupadd <groupName>` then go to `/etc/group` and get the groupID. 
+
+`sudo useradd -G <groupID> -m -c "User Name" <userID>` The -m is for the default home. It is better to use this because all other settings are taken by default. To see what settings are taken do `cat /etc/default/useradd`. In this there will be a `SKEL` command which if we `ls -a /etc/skel` we will see it has all the `.bash_profile` etc. 
+
+To change password `sudo passwd <userID>`
+
+## Symbolic Link
+
+These are shortcuts. Created to easily access a file instead of typing the entire path. 
+
+to create a symbolic link `ln -s /location/file file.lnk`
+
+To remove the link `unlink file.lnk`
+
+## tmp file and Sticky bits
+
+`/var/tmp` contains files that DO NOT get deleted where as `/tmp` files get deleted
+
+The sticky bit are shows by `t` in the permission and it allows users that create their own files and folders to delete theirs and not another users
+
+![](./img/stickybits.png)
+
+to make a folder sticky bit you can do `chmod o+t folder` or `chmod 1777 folder`
+
+# Sources
+
+Linux Essentials
+https://linuxacademy.com/cp/modules/view/id/161
+
+
+Bash Scripting
+https://linuxacademy.com/cp/modules/view/id/72
+
+Linux Red hat System Admin
+https://linuxacademy.com/cp/modules/view/id/39
+
+Linux Full CI/CD Pipeline
+https://linuxacademy.com/cp/courses/lesson/course/2196/lesson/2/module/218
+
+Virtualization Course
+https://linuxacademy.com/cp/modules/view/id/211
+
+OpenSource Admin
+https://linuxacademy.com/cp/modules/view/id/194
