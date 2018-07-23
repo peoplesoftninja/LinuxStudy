@@ -479,3 +479,48 @@ Also note, every system has a local address which can be used by itself only. Th
 
 
 ![](networkCommands.png)
+
+# TODO
+
+# Basic Identity
+
+To see the users logged in `who` and `w` for more details. This will show current users only.
+
+To see the details of the user do `id <usr>`
+
+Three main files that store user information `/etc/passwd` which is primary config file for all users on a system. The `/etc/group` which is primary config file for all groups on system
+
+# Adding Users
+
+![](addingUsers.png)
+
+`sudo groupadd <groupName>` then go to `/etc/group` and get the groupID. 
+
+`sudo useradd -G <groupID> -m -c "User Name" <userID>` The -m is for the default home. It is better to use this because all other settings are taken by default. To see what settings are taken do `cat /etc/default/useradd`. In this there will be a `SKEL` command which if we `ls -a /etc/skel` we will see it has all the `.bash_profile` etc. 
+
+To change password `sudo passwd <userID>`
+
+# File and Directory Permission
+
+![](permissionCheatSheet.png)
+
+|Symbolic|Octal|
+|---|---|
+|1|x|
+|2|w|
+|3|x;w|
+|4|r|
+|5|r;x|
+|6|r;w|
+|7|r;w;x|
+
+`chmod -R 775 file.log` = rwxrwxr-x
+
+The key values to remember are
+r|w|x
+4|2|1
+
+
+# Revise above 
+# Review AWS Route53
+# Security and File Permission
