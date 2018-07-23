@@ -517,8 +517,9 @@ To change password `sudo passwd <userID>`
 `chmod -R 775 file.log` = rwxrwxr-x
 
 The key values to remember are
+
 r|w|x
---|--|
+---|---|---|
 4|2|1
 
 
