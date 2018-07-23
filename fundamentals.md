@@ -518,6 +518,7 @@ To change password `sudo passwd <userID>`
 
 The key values to remember are
 r|w|x
+--|--|
 4|2|1
 
 
