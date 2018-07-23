@@ -200,6 +200,12 @@ in man to search, use `/` for forward search and `?` for backward search and `n`
 
 ![](LinuxFileHeirarchy.png)
 
+The hardrives are located in `/dev` For the first directory it will be `/dev/sda` and second will be `/dev/sdb` and so no. The first partition in the first drive will be `/dev/sda1` and so on
+
+result for `df -g`
+
+![](personalDirectoryStructure.png)
+
 
 # FILES AND DIRECTORIES
 
@@ -411,3 +417,65 @@ USERNAME=`who -m | cut -d" " -f1`
 ```
 The above will store the user name in the variable `USERNAME`
 
+## Hardware
+
+To get processor information `prtconf`
+
+Memory Usage
+
+`nmon` followed by `m` for total memory
+
+`nmon` followed by `t` followed by `4` for memory per process
+
+## Process
+
+A set of instructions loaded in the memory
+
+`ps` ran by itself will show processes in the current shell
+
+`ps -u user` will show the processes under that user
+
+`ps -e` shows all processes by all users
+
+`ps -ef` will show the above but also the path from where the command is running. This is taken from `/proc` directory
+
+# System Logging
+
+`/var/log` is where all major logs are. You need root access for this. `boot.log` has information when the user logs in. `messages.log` will have information about what is happening. `secure.log` has any IDM change
+
+# Networking
+
+Each computer, Ipad, Phone have a unique number called macnumber/physical address. In Windows you can get this by typing `getmac` in cmd. For linux it is `ifconfig -a` . For AIX it is `netstat -ia`
+
+Each computer connected to a network has an IP(Internet Protocol). This is a Logical Number, that means it changes with the change of network.
+
+Subnetmask(Network Mask) is a collection of IP addresses given to number of devices in a small area. This is done by the router. 
+
+Gateway address is the address of the device which will be used to talk to the Internet. This is similar to IP address but it will be the address of the router.
+
+DNS(Domain Name Server) Translates Domain names of websites to their IP address. These are basically big servers which have a sort of a database which has the IP address and their associated domain name. 
+
+The ISP(Internet service providers) keeps the information of where to send the IP address in their routing tables, which is basically stored in really big servers.
+
+```cmd
+
+Pinging google.com [172.217.11.78] with 32 bytes of data:
+Reply from 172.217.11.78: bytes=32 time=39ms TTL=252
+Reply from 172.217.11.78: bytes=32 time=39ms TTL=252
+Reply from 172.217.11.78: bytes=32 time=41ms TTL=252
+Reply from 172.217.11.78: bytes=32 time=3007ms TTL=252
+
+Ping statistics for 172.217.11.78:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 39ms, Maximum = 3007ms, Average = 781ms
+```
+
+Above google is domai name and 172.217.11.78 is an IP address. There is a Name Server which will do this translation. 
+
+![](simplifiedNetwork.png)
+
+Also note, every system has a local address which can be used by itself only. This is important when we do some testings, like creating a server and using our local system as a server to perform tasks. The local(loopback) IP address always is `127.0.0.1`
+
+
+![](networkCommands.png)
